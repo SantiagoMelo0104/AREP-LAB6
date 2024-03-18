@@ -15,11 +15,17 @@ Es **importante**❗tener instalado:
 
 # DockerHub
 Se encuntra en el siguiente repositorio: [darkxs/arep-lab6](https://hub.docker.com/repository/docker/darkxs/arep-lab6/general)
+ Pantallazo de cuando se subio al repositorio:
+ ![imagen](https://github.com/SantiagoMelo0104/AREP-LAB6/assets/123812833/dfeecd9f-b5fc-4603-98e5-7f0a5f35a928)
+
  # Arquitectura 📄 
+
  
  # Diseño de clases 
 
-# Instalación ⬇️
+ 
+
+# Instalación ⬇️ y Ejecución🪄
 * Los siguiente comando le permitira clonar el repositorio de manera local:
   ~~~
   git clone https://github.com/SantiagoMelo0104/AREP-LAB6.git
@@ -53,7 +59,7 @@ Se encuntra en el siguiente repositorio: [darkxs/arep-lab6](https://hub.docker.c
   ~~~
   ![imagen](https://github.com/SantiagoMelo0104/AREP-LAB6/assets/123812833/eeddce6c-3c11-46e6-bc7a-b866eca4b7ef)
 
-# Ejecución🪄
+
 
 # Pruebas 
 ## Local 
@@ -84,7 +90,7 @@ http://ec2-54-90-216-27.compute-1.amazonaws.com:4567/formulario.html
 
 # Prueba del Despliegue:
 
-  [VIDEO AWS]()
+  [VIDEO AWS](https://youtu.be/Y0iIeu5fBHY)
 
 # Autor 
 Santiago Naranjo Melo [SantiagoMelo0104](https://github.com/SantiagoMelo0104)
