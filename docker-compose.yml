@@ -1,0 +1,36 @@
+version: '3'
+services:
+  robin:
+    image: round
+    ports:
+      - "4567:4567"
+    container_name: round
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    command: 'mongod'
+
+  servidor1:
+    image: service
+    ports:
+      - "4568:4568"
+    container_name: servidor1
+
+  servidor2:
+    image: service
+    ports:
+      - "4569:4568"
+    container_name: servidor2
+
+  servidor3:
+    image: service
+    ports:
+      - "4570:4568"
+    container_name: servidor3
+
+volumes:
+    mongodb:
+    mongodb_config:
