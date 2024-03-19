@@ -1,4 +1,4 @@
-LABORATORIO 6 - PATRONES ARQUITECTURALES
+# LABORATORIO 6 - PATRONES ARQUITECTURALES
 
 En este laboratorio, se construirá una aplicación web utilizando una arquitectura basada en microservicios y se desplegará en AWS utilizando EC2 y Docker. La aplicación constará de dos microservicios: un servicio MongoDB que almacenará las cadenas enviadas por el cliente web, y un servicio REST llamado LogService que recibirá las cadenas, las almacenará en la base de datos y responderá con un objeto JSON que incluya las 10 últimas cadenas almacenadas junto con las fechas en que fueron almacenadas.
 
@@ -15,13 +15,25 @@ Es **importante**❗tener instalado:
 
 # DockerHub
 Se encuntra en el siguiente repositorio: [darkxs/arep-lab6](https://hub.docker.com/repository/docker/darkxs/arep-lab6/general)
+
  Pantallazo de cuando se subio al repositorio:
  ![imagen](https://github.com/SantiagoMelo0104/AREP-LAB6/assets/123812833/dfeecd9f-b5fc-4603-98e5-7f0a5f35a928)
 
  # Arquitectura 📄 
+La arquitectura de este laboratorio consta de dos proyectos principales, cada uno con su propia estructura de paquetes y clases.
 
+El primer proyecto [Service](https://github.com/SantiagoMelo0104/AREP-LAB6/tree/master/Service) tiene una clase llamada LogService en el paquete org.arep. Esta clase es la encargada de gestionar las peticiones HTTP GET en la ruta "/logservice" y almacenar los mensajes de log en una base de datos MongoDB. La conexión a la base de datos se realiza mediante el driver oficial de MongoDB para Java, y se utiliza la librería Gson para convertir los datos almacenados en JSON.
+
+El segundo proyecto [ROUND_ROBIN](https://github.com/SantiagoMelo0104/AREP-LAB6/tree/master/ROUND_ROBIN) tiene dos clases en el paquete org.arep. La primera clase se llama App y es la encargada de gestionar las peticiones HTTP GET en la ruta "/log". Al recibir una petición, esta clase invoca al método getLogs de la clase RRInvoker para obtener los últimos 10 mensajes de log almacenados en la base de datos.
+
+La segunda clase del segundo proyecto se llama RRInvoker y es la encargada de implementar un mecanismo de equilibrado de carga round-robin para distribuir las peticiones de log entre varios servidores. La clase mantiene una lista de URLs de los servidores de log y rota entre ellos cada vez que se realiza una petición. De esta forma, se distribuye la carga de trabajo entre los diferentes servidores y se evita sobrecargar a un único servidor.
  
  # Diseño de clases 
+**1. LogService:** Esta clase implementa el servicio de registro de mensajes en una base de datos MongoDB. La clase tiene un método main que inicializa el servidor web Spark y configura las rutas para manejar las solicitudes GET. El método logMessage es responsable de insertar un nuevo documento en la colección de logs en MongoDB y devolver los últimos 10 registros en formato JSON.
+
+**2. App:** Esta clase implementa el punto de entrada principal del segundo proyecto. La clase tiene un método main que inicializa el servidor web Spark y configura las rutas para manejar las solicitudes GET. El método getLogs es invocado cuando se accede a la ruta "/log". Este método hace una solicitud HTTP GET a uno de los servidores de registro rotando entre ellos utilizando un algoritmo Round-Robin.
+
+**3. RRInvoker:** Esta clase implementa un invocador de Round-Robin para realizar solicitudes HTTP GET a los servidores de registro. La clase mantiene una lista de URL de los servidores de registro y una variable currentServer para realizar un seguimiento del servidor actual al que se realizará la próxima solicitud. El método rotateRoundRobinServer devuelve la URL del siguiente servidor en la rotación. El método getLogs es responsable de realizar la solicitud HTTP GET al servidor de registro seleccionado y devolver la respuesta en forma de lista de cadenas.
 
  
 
